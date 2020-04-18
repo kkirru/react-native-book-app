@@ -120,7 +120,7 @@ export default class App extends React.Component {
             data={this.state.books}
             // deconstruct item > {item}
             renderItem={({ item }, index) => this.renderBooks(item, index)}
-            keyExtractor={(item, index) => { index.toString() }}
+            keyExtractor={(item, index) => index.toString()}
             ListEmptyComponent={
               <View style={{ marginTop: 50, alignItems: 'center' }}>
                 <Text style={{ fontWeight: 'bold', fontSize: 15 }}>
