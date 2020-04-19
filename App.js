@@ -1,7 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, SafeAreaView, TouchableOpacity, TextInput, FlatList } from 'react-native';
-import BookCount from './BookCount';
+import BookCount from './components/BookCount';
 import { Ionicons } from '@expo/vector-icons'
+import CustomActionButton from './components/CustomActionButton';
+import colors from './assets/colors';
 
 export default class App extends React.Component {
   constructor() {
@@ -66,13 +68,13 @@ export default class App extends React.Component {
         <View style={{ flex: 1, justifyContent: 'center' }}>
           <Text style={{ paddingLeft: 5, }}>{item}</Text>
         </View>
-        <TouchableOpacity
+        <CustomActionButton
           onPress={() => this.markAsRead(item, index)}
-        >
-          <View style={{ width: 100, height: 50, backgroundColor: '#a5deba', justifyContent: 'center', alignItems: 'center' }}>
-            <Text style={{ color: 'white', fontWeight: 'bold' }}> Mark as read</Text>
-          </View>
-        </TouchableOpacity>
+          style={{ width: 100, backgroundColor: colors.bgSuccess }}>
+          <Text style={{ color: 'white', fontWeight: 'bold' }}>
+            Mark as read
+          </Text>
+        </CustomActionButton>
       </View>
     )
   }
@@ -89,30 +91,29 @@ export default class App extends React.Component {
           {this.state.isAddNewBookVisible &&
             <View style={{ height: 50, flexDirection: 'row' }}>
               <TextInput
-                style={{ flex: 1, backgroundColor: '#ececec', padding: 10 }}
+                style={{ flex: 1, backgroundColor: colors.bgTextInput, padding: 10 }}
                 placeholder='Enter book name'
                 onChangeText={(text) => this.onChangeInput(text)}
               />
-              <TouchableOpacity
+              <CustomActionButton
+                style={{ backgroundColor: colors.bgSuccess }}
                 onPress={() => this.addNewBook(this.state.textInputData)}>
-                <View style={{ width: 50, height: 50, backgroundColor: '#a5deba', justifyContent: 'center', alignItems: 'center' }}>
-                  <Ionicons
-                    name='ios-checkmark'
-                    color='white'
-                    size={40}
-                  />
-                </View>
-              </TouchableOpacity>
-              <TouchableOpacity
+                <Ionicons
+                  name='ios-checkmark'
+                  color='white'
+                  size={40}
+                />
+              </CustomActionButton>
+              <CustomActionButton
+                style={{ backgroundColor: colors.bgError }}
                 onPress={this.cancelAddNewBook}>
-                <View style={{ width: 50, height: 50, backgroundColor: '#deada5', justifyContent: 'center', alignItems: 'center' }}>
-                  <Ionicons
-                    name='ios-close'
-                    color='white'
-                    size={40}
-                  />
-                </View>
-              </TouchableOpacity>
+                <Ionicons
+                  name='ios-close'
+                  color='white'
+                  size={40}
+                />
+              </CustomActionButton>
+
             </View>
           }
           {/* BookList */}
